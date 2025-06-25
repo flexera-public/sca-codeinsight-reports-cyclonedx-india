@@ -257,7 +257,7 @@ def main():
         logger.info(f"Current directory: {current_directory}")
 
         # Define the DBReports directory path
-        quickDBReports_dir = os.path.join(current_directory, "reports")
+        quickDBReports_dir = os.path.join(current_directory, "reportsBackup")
 
         # Check if quickDBReports directory exists, if not create it
         if not os.path.exists(quickDBReports_dir):
