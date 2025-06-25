@@ -19,6 +19,9 @@ The `sca-codeinsight-reports-cyclonedx-DB-Driven` repository provides a report f
    Place the unzipped `sca-codeinsight-reports-cyclonedx-DB-Driven` directory into the `$CODEINSIGHT_INSTALLDIR/custom_report_scripts` directory.  
    *Note: If the `custom_report_scripts` directory does not exist, create it before moving the files.*
 
+### Java Requirements
+To query data from the Code Insight database, the `<Install Location>\samples\customreport_helper\DBConnection.jar` file is required. Java is needed to run this JAR. You can specify the Java path in the `user_java_path` variable within `report_data_db.py`. If this variable is not set, the script will look for the `JAVA_HOME` environment variable. If neither is found, it will default to the Code Insight JRE located at `<Install Location>\jre`.
+
 ### Python Requirements
 
 This repository requires the `Requests` module to interact with the Code Insight API's. Install the dependencies using the following command:
