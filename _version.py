@@ -7,4 +7,4 @@ Author : sarthak
 Created On : Thu Apr 24 2025
 File : _version.py
 '''
-__version__ = "2.0.0"
+__version__ = "2.0.1"

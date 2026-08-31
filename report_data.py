@@ -165,13 +165,26 @@ def gather_data_for_report(projectID, reportData, reportOptions):
             # Manage license details
             licenseDetails = {}
 
+            # If the inventory item has a resolved license expression (numeric IDs
+            # already substituted with SPDX identifiers by _resolve_license_expressions
+            # in report_data_db.py), use it directly as a CycloneDX <expression>.
+            # Fall through to the normal single-license logic when absent.
+            resolvedLicenseExpression = inventoryItem.get("resolvedLicenseExpression")
+
             selectedLicenseSPDXIdentifier = inventoryItem[
                 "selectedLicenseSPDXIdentifier"
             ]
             selectedLicenseName = inventoryItem["selectedLicenseName"]
             selectedLicenseUrl = inventoryItem["selectedLicenseUrl"]
 
-            if selectedLicenseName == "I don't know":
+            if resolvedLicenseExpression:
+                logger.info(
+                    f'        Using resolved license expression for inventory item {inventoryID}: "{resolvedLicenseExpression}"'
+                )
+                licenseDetails["licenseObjectType"] = "expression"
+                licenseDetails["licenseExpression"] = resolvedLicenseExpression
+
+            elif selectedLicenseName == "I don't know":
                 comp_license = report_data_db.get_comp_license(
                     inventoryItem["component_id"]
                 )
